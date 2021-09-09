@@ -1,4 +1,4 @@
-PLATFORM		?= zcu102
+PLATFORM		?= zc702
 BSP_PATH		?= ../xilinx-${PLATFORM}-v$(PETALINUX_VER)-final.bsp
 PRJ_PATH		?= ../petalinux-optee-$(PLATFORM)
 OPTEE_VER		?= latest
@@ -20,9 +20,9 @@ define set_optee_version
 endef
 
 ifeq ($(PLATFORM),ultra96-reva)
-	ZYNQMP_CONSOLE=cadence1
+	ZYNQ_CONSOLE=cadence1
 else
-	ZYNQMP_CONSOLE=cadence0
+	ZYNQ_CONSOLE=cadence0
 endif
 
 .PHONY: all
@@ -44,14 +44,14 @@ create: check
 	@#
 	@# Append the ATF recipe to include opteed as SPD
 	@mkdir -p ${PRJ_PATH}/project-spec/meta-user/recipes-bsp/arm-trusted-firmware
-	@cp zynqmp/arm-trusted-firmware/*.bbappend ${PRJ_PATH}/project-spec/meta-user/recipes-bsp/arm-trusted-firmware/.
+	@cp zynq7k/arm-trusted-firmware/*.bbappend ${PRJ_PATH}/project-spec/meta-user/recipes-bsp/arm-trusted-firmware/.
 	@#
 	@# Download optee package  recipes from meta-arm layer using gatesgarth branch as there were not available for zeus
 	@curl -s https://git.yoctoproject.org/cgit/cgit.cgi/meta-arm/snapshot/meta-arm-3.2.tar.gz -o ../meta-arm-3.2.tar.gz
 	@tar -C ${PRJ_PATH}/project-spec/meta-user --strip-components=2 -xvf ../meta-arm-3.2.tar.gz meta-arm-3.2/meta-arm/recipes-security > /dev/null
 	@#
 	@# Copy the bbapend files for our target
-	@cp zynqmp/optee/* ${PRJ_PATH}/project-spec/meta-user/recipes-security/optee/.
+	@cp zynq7k/optee/* ${PRJ_PATH}/project-spec/meta-user/recipes-security/optee/.
 	@#
 	@# Download python package dependencies from meta-core layer using gatesgarth branch as there were not available for zeus
 	@mkdir -p ${PYTHON_PATH}
@@ -69,10 +69,10 @@ create: check
 	@#
 	@# Add optee kernel options to the exisiting kernel append recipe
 	@echo SRC_URI_append += \"file://kernel_optee.cfg\" >> ${PRJ_PATH}/project-spec/meta-user/recipes-kernel/linux/linux-xlnx_%.bbappend
-	@cp zynqmp/kernel/kernel_optee.cfg ${PRJ_PATH}/project-spec/meta-user/recipes-kernel/linux/linux-xlnx/kernel_optee.cfg
+	@cp zynq7k/kernel/kernel_optee.cfg ${PRJ_PATH}/project-spec/meta-user/recipes-kernel/linux/linux-xlnx/kernel_optee.cfg
 	@#
 	@# Replace exisiting user configued dts file to add optee node
-	@cp zynqmp/device-tree/system-user.dtsi ${PRJ_PATH}/project-spec/meta-user/recipes-bsp/device-tree/files/system-user.dtsi
+	@cp zynq7k/device-tree/system-user.dtsi ${PRJ_PATH}/project-spec/meta-user/recipes-bsp/device-tree/files/system-user.dtsi
 
 
 build: create
