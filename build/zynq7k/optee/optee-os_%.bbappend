@@ -1,8 +1,8 @@
-OPTEEMACHINE = "zynqmp-zcu102"
-COMPATIBLE_MACHINE_zynqmp = "zynqmp-generic|ultra96-zynqmp"
+OPTEEMACHINE = "zynq7k-zc702"
+COMPATIBLE_MACHINE_zynq = "zynq-generic|ultra96-zynq"
 
 
-EXTRA_OEMAKE_append = " CFG_TEE_CORE_LOG_LEVEL=2"
+EXTRA_OEMAKE_append = " CFG_TEE_CORE_LOG_LEVEL=3 CFG_TEE_TA_LOG_LEVEL=3"
 
 PLNX_DEPLOY_DIR ?= "${TOPDIR}/images/linux"
 

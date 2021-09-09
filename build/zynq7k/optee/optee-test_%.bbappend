@@ -1,1 +1,1 @@
-COMPATIBLE_MACHINE_zynqmp = "zynqmp-generic|ultra96-zynqmp"
+COMPATIBLE_MACHINE_zynq = "zynq-generic|ultra96-zynq"
