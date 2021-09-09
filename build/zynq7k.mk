@@ -84,5 +84,5 @@ qemu: check
 	    --kernel
 
 package: check
-	@petalinux-package --boot --pmufw --fpga --u-boot --add ${PRJ_PATH}/images/linux/tee_raw.bin --cpu a53-0 \
-	    --file-attribute "load=0x60000000, startup=0x60000000, exception_level=el-1, trustzone" --force -p ${PRJ_PATH}
+	@petalinux-package --boot --fsbl --fpga --u-boot --add ${PRJ_PATH}/images/linux/tee_raw.bin \
+	    --file-attribute "load=0x60000000, startup=0x60000000" --force -p ${PRJ_PATH}
