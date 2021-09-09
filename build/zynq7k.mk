@@ -65,7 +65,7 @@ create: check
 	-o ${PYTHON_PATH}/python-pycryptodome.inc
 	@#
 	@# Add packages to the image
-	@echo IMAGE_INSTALL_append = \" optee-os optee-client optee-test\" >> ${PRJ_PATH}/project-spec/meta-user/conf/petalinuxbsp.conf
+	@echo IMAGE_INSTALL_append = \" optee-os optee-client\" >> ${PRJ_PATH}/project-spec/meta-user/conf/petalinuxbsp.conf
 	@#
 	@# Add optee kernel options to the exisiting kernel append recipe
 	@echo SRC_URI_append += \"file://kernel_optee.cfg\" >> ${PRJ_PATH}/project-spec/meta-user/recipes-kernel/linux/linux-xlnx_%.bbappend
