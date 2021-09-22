@@ -42,13 +42,9 @@ create: check
 	@mkdir -p /tmp/petalinux-optee-${PLATFORM}
 	@petalinux-create -n $(PRJ_PATH) -t project -s $(BSP_PATH) --tmpdir /tmp/petalinux-optee-${PLATFORM}
 	@#
-	@# Append the ATF recipe to include opteed as SPD
-	@mkdir -p ${PRJ_PATH}/project-spec/meta-user/recipes-bsp/arm-trusted-firmware
-	@cp zynq7k/arm-trusted-firmware/*.bbappend ${PRJ_PATH}/project-spec/meta-user/recipes-bsp/arm-trusted-firmware/.
-	@#
 	@# Download optee package  recipes from meta-arm layer using gatesgarth branch as there were not available for zeus
-	@curl -s https://git.yoctoproject.org/cgit/cgit.cgi/meta-arm/snapshot/meta-arm-3.2.tar.gz -o ../meta-arm-3.2.tar.gz
-	@tar -C ${PRJ_PATH}/project-spec/meta-user --strip-components=2 -xvf ../meta-arm-3.2.tar.gz meta-arm-3.2/meta-arm/recipes-security > /dev/null
+	@curl -s https://git.yoctoproject.org/cgit/cgit.cgi/meta-arm/snapshot/meta-arm-3.3.tar.gz -o ../meta-arm-3.3.tar.gz
+	@tar -C ${PRJ_PATH}/project-spec/meta-user --strip-components=2 -xvf ../meta-arm-3.3.tar.gz meta-arm-3.3/meta-arm/recipes-security > /dev/null
 	@#
 	@# Copy the bbapend files for our target
 	@cp zynq7k/optee/* ${PRJ_PATH}/project-spec/meta-user/recipes-security/optee/.
